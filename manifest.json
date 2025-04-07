@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "zyBooks Injector",
+  "version": "1.0",
+  "description": "Injects js software that completes zybooks participation activity.",
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "zyBook Injector"
+  }
+}
