@@ -15,7 +15,7 @@
         if (index < radioButtons.length) {
             radioButtons[index].click();
             index++;
-            setTimeout(clickNextButton, 50); // adjust delay as needed
+            setTimeout(clickNextButton, 50);
         }
     }
     clickNextButton();
@@ -28,7 +28,7 @@
         if (index2 < x2Buttons.length) {
             x2Buttons[index2].click();
             index2++;
-            setTimeout(clickNextBox, 50); // adjust delay as needed
+            setTimeout(clickNextBox, 50);
         }
     }
     clickNextBox();
@@ -41,28 +41,29 @@
         if (index3 < startButtons.length) {
             startButtons[index3].click();
             index3++;
-            setTimeout(clickNextStartButton, 50); // adjust delay as needed
+            setTimeout(clickNextStartButton, 50);
         }
     }
     clickNextStartButton();
 
 
     // CLICK ALL PLAY BUTTONS
-    function clickNextPlayButton() {
-        let playButtons = document.querySelectorAll('div[class="play-button  bounce"]');
-        // let playButtons = document.querySelectorAll('button[class="zb-button  grey              normalize-controls"]');
-        setTimeout(clickNextPlayButton, 50); // adjust delay as needed
-        let index4 = 0;
-        if (index4 < playButtons.length) {
-            playButtons[index4].click();
-            index4++;
-        }
-        // let pauseButtons = document.querySelectorAll('button[class="pause-button  bounce"]');
-        // if (pauseButtons.length != 0) {
-        //     clickNextPlayButton;
-        // }
+    function clickAllPlayButtons() {
+        // Select any button whose aria-label is Play and contains a div.play-button
+        const playButtons = document.querySelectorAll(
+            'button[aria-label="Play"] div.play-button'
+        );
+
+        playButtons.forEach(btnDiv => {
+            const button = btnDiv.closest('button');
+            if (button) button.click();
+        });
+
+        // Repeat every 50ms if you need continuous scanning
+        setTimeout(clickAllPlayButtons, 50);
     }
-    clickNextPlayButton();
+
+    clickAllPlayButtons();
 
 
     // CLICK ALL SHOW ANSWER BUTTONS
@@ -72,7 +73,7 @@
         let showAnswerButtons = document.querySelectorAll('button[class="zb-button secondary             show-answer-button"]');
         if (index5 < showAnswerButtons.length) {
             showAnswerButtons[index5].click();
-            setTimeout(() => showAnswerButtons[index5].click(), 50); // adjust delay as needed
+            setTimeout(() => showAnswerButtons[index5].click(), 50);
             index5++;
         }
     }
