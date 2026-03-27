@@ -1,28 +1,46 @@
-# Zybook Extension
+# Zybooks DOM Automation Extension
 
-## Installation
-```bash
-$ git clone https://github.com/YashShah138/zybook-extension.git
+A Chrome extension (Manifest V3) that automates DOM interactions on the Zybooks learning platform. Built with a service worker architecture, content script injection, and zero-dependency vanilla JavaScript. Adopted by 30+ students at SMU.
+
+## Tech Stack
+
+- **JavaScript** — content scripts + background service worker
+- **Chrome Extensions API (Manifest V3)** — `activeTab`, `scripting` permissions
+- **DOM Automation** — programmatic interaction with dynamically rendered page elements
+- `.crx` packaging for direct distribution without the Chrome Web Store
+
+## Architecture
+
+```
+manifest.json        # Extension config — MV3, permissions, service worker entry
+background.js        # Service worker — handles extension lifecycle and tab communication
+content.js           # Injected into Zybooks pages — drives DOM interaction logic
 ```
 
-## Setup
+The background service worker listens for the extension action and programmatically injects `content.js` into the active tab using the `scripting` API. The content script then traverses and interacts with the DOM on the target page.
 
-- Open chrome
-- Navigate to [chrome extensions](chrome://extensions/)
-- In the top right corner, there should be a toggle to turn on `developer mode`
-  - Toggle it on
-- Now in the top left corner, there should be a button that says `Load unpacked`
-- Navigate to where you installed the folder in the **Installation** section
-- Click on that folder
-- That's it
+## Installation
 
-Now anytime you want to use the extension, just click on the icon
+```bash
+git clone https://github.com/YashShah138/zybook-extension.git
+```
 
+1. Open Chrome and navigate to `chrome://extensions`
+2. Enable **Developer Mode** (toggle in the top right)
+3. Click **Load unpacked** (top left)
+4. Select the cloned repo folder
 
-## Notes
-- You will need to refresh the page everytime you start a new section.
+The extension icon will appear in your toolbar. Click it on any Zybooks page to run.
 
+> **Note:** Refresh the page when navigating to a new section before running the extension.
 
-## Submitting Feedback/Update Requests
+## How It Works
 
-Either create a pull request or feel free to email me at portfolioresponses1@gmail.com
+When triggered, the extension:
+1. Activates via the Chrome toolbar action
+2. The background service worker uses `chrome.scripting.executeScript` to inject the content script into the current tab
+3. The content script queries the DOM for interactive Zybooks elements and dispatches the appropriate events programmatically
+
+## Contributing
+
+Open a pull request or reach out at [portfolioresponses1@gmail.com](mailto:portfolioresponses1@gmail.com) for feedback or feature requests.
